@@ -8,3 +8,29 @@
 #
 # Authors:
 #   Dimitar Dimitrov <dimitrov.inc@gmail.com>
+
+
+
+function prompt_radium_precmd {
+  # Check for untracked files or updated submodules since vcs_info doesn't.
+  if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
+    fmt_branch="%b%u%c${__PROMPT_SKWP_COLORS[4]}●%f"
+  else
+    fmt_branch="%b%u%c"
+  fi
+  zstyle ':vcs_info:*:prompt:*' formats "${fmt_branch}"
+
+  vcs_info 'prompt'
+}
+
+function prompt_radium_setup {
+  setopt LOCAL_OPTIONS
+  unsetopt XTRACE KSH_ARRAYS
+  prompt_opts=(cr percent subst)
+
+  autoload -Uz vcs_info
+
+  add-zsh-hook precmd prompt_radium_precmd
+}
+
+prompt_radium_setup "$@"
