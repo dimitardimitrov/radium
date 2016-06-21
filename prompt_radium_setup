@@ -90,9 +90,11 @@ function prompt_radium_setup {
   RADIUM_SEPARATOR=$'\u2b80'
   RADIUM_R_SEPARATOR=$'\u2b82'
 
-  RADIUM_LEFT_USERNAME_HOSTNAME="%K{black}%F{white}%n%k%f%F{red} @ %f%F{green}%m %f%F{black}%K{green}"$RADIUM_SEPARATOR
+  RADIUM_LEFT_USERNAME_HOSTNAME="%K{black}%F{white}%n%k%f%F{red} @ %f%F{blue}%m %f%F{black}%K{blue}"$RADIUM_SEPARATOR
+  RADIUM_LEFT_VCS="%k%f%F{white}%K{blue} "'${vcs_info_msg_0_}'" %k%f%F{blue}%K{black}"$RADIUM_SEPARATOR
 
-  PROMPT=$RADIUM_LEFT_USERNAME_HOSTNAME
+
+  PROMPT=$RADIUM_LEFT_USERNAME_HOSTNAME$RADIUM_LEFT_VCS
 }
 
 prompt_radium_setup "$@"
