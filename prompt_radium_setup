@@ -9,6 +9,52 @@
 # Authors:
 #   Dimitar Dimitrov <dimitrov.inc@gmail.com>
 
+# returns the time since last git commit
+function git_time_details() {
+  # only proceed if there is actually a git repository
+  if `git rev-parse --git-dir > /dev/null 2>&1`; then
+    # only proceed if there is actually a commit
+    if [[ $(git log 2>&1 > /dev/null | grep -c "^fatal: bad default revision") == 0 ]]; then
+      # get the last commit hash
+      # lc_hash=`git log --pretty=format:'%h' -1 2> /dev/null`
+      # get the last commit time
+      lc_time=`git log --pretty=format:'%at' -1 2> /dev/null`
+
+      now=`date +%s`
+      seconds_since_last_commit=$((now-lc_time))
+      lc_time_since=`time_since_commit $seconds_since_last_commit`
+
+      echo "$lc_time_since"
+    else
+      echo ""
+    fi
+  else
+    echo ""
+  fi
+}
+
+# returns the time by given seconds
+function time_since_commit() {
+  seconds_since_last_commit=$(($1 + 0))
+
+  # totals
+  MINUTES=$((seconds_since_last_commit / 60))
+  HOURS=$((seconds_since_last_commit/3600))
+
+  # sub-hours and sub-minutes
+  DAYS=$((seconds_since_last_commit / 86400))
+  SUB_HOURS=$((HOURS % 24))
+  SUB_MINUTES=$((MINUTES % 60))
+
+  if [ "$HOURS" -gt 24 ]; then
+    echo "${DAYS}d${SUB_HOURS}h${SUB_MINUTES}m"
+  elif [ "$MINUTES" -gt 60 ]; then
+    echo "${HOURS}h${SUB_MINUTES}m"
+  else
+    echo "${MINUTES}m"
+  fi
+}
+
 function prompt_radium_precmd {
   # Check for untracked files or updated submodules since vcs_info doesn't.
   if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
@@ -92,9 +138,10 @@ function prompt_radium_setup {
 
   RADIUM_LEFT_USERNAME_HOSTNAME="%K{black}%F{white}%n%k%f%F{red} @ %f%F{blue}%m %f%F{black}%K{blue}"$RADIUM_SEPARATOR
   RADIUM_LEFT_DIR="%K{blue}%F{white} %~ %k%f%F{blue}%K{green}"$RADIUM_SEPARATOR
-  RADIUM_LEFT_VCS="%k%f%F{white}%K{green} "'${vcs_info_msg_0_}'" %k%f%F{green}%K{black}"$RADIUM_SEPARATOR
+  RADIUM_LEFT_VCS="%k%f%F{white}%K{green} "'${vcs_info_msg_0_}'" %k%f%F{green}%K{136}"$RADIUM_SEPARATOR
+  RADIUM_LEFT_GITCOMMIT="%k%f%F{white}%K{136} "'$(git_time_details)'" %k%f%F{136}"$RADIUM_SEPARATOR"%f "
 
-  PROMPT=$RADIUM_LEFT_USERNAME_HOSTNAME$RADIUM_LEFT_DIR$RADIUM_LEFT_VCS
+  PROMPT=$RADIUM_LEFT_USERNAME_HOSTNAME$RADIUM_LEFT_DIR$RADIUM_LEFT_VCS$RADIUM_LEFT_GITCOMMIT
 }
 
 prompt_radium_setup "$@"
