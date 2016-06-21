@@ -1,0 +1,10 @@
+#
+# A ZSH theme based on swkp prezto theme, the robl ohmyzsh theme, and the paradox prezto theme.
+#  * Single line prompt
+#  * User@hostname on the left
+#  * Git branch info on the left
+#  * Time since last commit on the left
+#  * Time of execution on the right
+#
+# Authors:
+#   Dimitar Dimitrov <dimitrov.inc@gmail.com>
