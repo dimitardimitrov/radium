@@ -9,8 +9,6 @@
 # Authors:
 #   Dimitar Dimitrov <dimitrov.inc@gmail.com>
 
-
-
 function prompt_radium_precmd {
   # Check for untracked files or updated submodules since vcs_info doesn't.
   if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
@@ -92,9 +90,9 @@ function prompt_radium_setup {
   RADIUM_SEPARATOR=$'\u2b80'
   RADIUM_R_SEPARATOR=$'\u2b82'
 
-  RADIUM_LEFT_A="%K{green}%F{white} %~ %k%f%F{green}%K{blue}"$POWERLINE_SEPARATOR
+  RADIUM_LEFT_USERNAME_HOSTNAME="%K{black}%F{white}%n%k%f%F{red} @ %f%F{green}%m %f%F{black}%K{green}"$RADIUM_SEPARATOR
 
-  PROMPT=$RADIUM_LEFT_A
+  PROMPT=$RADIUM_LEFT_USERNAME_HOSTNAME
 }
 
 prompt_radium_setup "$@"
