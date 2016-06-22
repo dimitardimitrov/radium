@@ -148,6 +148,7 @@ function prompt_radium_setup {
 
   PROMPT=$RADIUM_LEFT_USER_HOSTNAME$RADIUM_LEFT_DIR$RADIUM_LEFT_VCS$RADIUM_LEFT_GIT_COMMIT_TIME
   RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
+  SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
 
 prompt_radium_setup "$@"
