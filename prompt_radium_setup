@@ -9,6 +9,23 @@
 # Authors:
 #   Dimitar Dimitrov <dimitrov.inc@gmail.com>
 
+# Radium colors
+RADIUM_LEFT_USER_HOSTNAME_BG=%K{black}
+RADIUM_LEFT_DIR_BG=%K{blue}
+RADIUM_LEFT_VCS_BG=%K{green}
+RADIUM_LEFT_GITCOMMIT_BG=%K{136}
+
+RADIUM_SEPARATOR=$'\u2b80'
+RADIUM_R_SEPARATOR=$'\u2b82'
+
+# return true if specified VCS is available in directory
+function vcs_exist() {
+# parameter VCS name: git, bzr, hg, svn
+# check if the VCS passed as parameter exists in the directory
+# return true if it exist and false if it does not
+# when no parameter is passed, check for git by default
+}
+
 # returns the time since last git commit
 function git_time_details() {
   # only proceed if there is actually a git repository
@@ -124,24 +141,12 @@ function prompt_radium_setup {
   zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
-  # Radium colors
-  RADIUM_COLOR_BG_GRAY=%K{240}
-  RADIUM_COLOR_BG_LIGHT_GRAY=%K{240}
-  RADIUM_COLOR_BG_WHITE=%K{255}
+  RADIUM_LEFT_USER_HOSTNAME="$RADIUM_LEFT_USER_HOSTNAME_BG%F{white}%n%f%F{red} @ %f%F{blue}%m %f%k%F{black}$RADIUM_LEFT_DIR_BG"$RADIUM_SEPARATOR
+  RADIUM_LEFT_DIR="$RADIUM_LEFT_DIR_BG%F{white} %~ %k%f%F{blue}$RADIUM_LEFT_VCS_BG"$RADIUM_SEPARATOR
+  RADIUM_LEFT_VCS="%k%f%F{white}$RADIUM_LEFT_VCS_BG "'${vcs_info_msg_0_}'" %k%f%F{green}$RADIUM_LEFT_GITCOMMIT_BG"$RADIUM_SEPARATOR
+  RADIUM_LEFT_GITCOMMIT="%k%f%F{white}$RADIUM_LEFT_GITCOMMIT_BG "'$(git_time_details)'" %k%f%F{136}"$RADIUM_SEPARATOR"%f "
 
-  RADIUM_COLOR_FG_GRAY=%F{240}
-  RADIUM_COLOR_FG_LIGHT_GRAY=%F{240}
-  RADIUM_COLOR_FG_WHITE=%F{255}
-
-  RADIUM_SEPARATOR=$'\u2b80'
-  RADIUM_R_SEPARATOR=$'\u2b82'
-
-  RADIUM_LEFT_USERNAME_HOSTNAME="%K{black}%F{white}%n%k%f%F{red} @ %f%F{blue}%m %f%F{black}%K{blue}"$RADIUM_SEPARATOR
-  RADIUM_LEFT_DIR="%K{blue}%F{white} %~ %k%f%F{blue}%K{green}"$RADIUM_SEPARATOR
-  RADIUM_LEFT_VCS="%k%f%F{white}%K{green} "'${vcs_info_msg_0_}'" %k%f%F{green}%K{136}"$RADIUM_SEPARATOR
-  RADIUM_LEFT_GITCOMMIT="%k%f%F{white}%K{136} "'$(git_time_details)'" %k%f%F{136}"$RADIUM_SEPARATOR"%f "
-
-  PROMPT=$RADIUM_LEFT_USERNAME_HOSTNAME$RADIUM_LEFT_DIR$RADIUM_LEFT_VCS$RADIUM_LEFT_GITCOMMIT
+  PROMPT=$RADIUM_LEFT_USER_HOSTNAME$RADIUM_LEFT_DIR$RADIUM_LEFT_VCS$RADIUM_LEFT_GITCOMMIT
 }
 
 prompt_radium_setup "$@"
