@@ -147,6 +147,7 @@ function prompt_radium_setup {
   RADIUM_LEFT_GIT_COMMIT_TIME="%k%f%F{white}$RADIUM_LEFT_GIT_COMMIT_TIME_BG "'$(git_time_details)'" %k%f%F{136}"$RADIUM_SEPARATOR"%f "
 
   PROMPT=$RADIUM_LEFT_USER_HOSTNAME$RADIUM_LEFT_DIR$RADIUM_LEFT_VCS$RADIUM_LEFT_GIT_COMMIT_TIME
+  RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
 }
 
 prompt_radium_setup "$@"
