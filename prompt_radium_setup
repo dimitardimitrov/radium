@@ -72,6 +72,10 @@ function time_since_commit() {
   fi
 }
 
+function prompt_radium_construct_prompt() {
+  print -n "$RADIUM_LEFT_USER_HOSTNAME_BG%F{white}%n%f%F{red} @ %f%F{blue}%m %f%k"
+}
+
 function prompt_radium_precmd {
   # Check for untracked files or updated submodules since vcs_info doesn't.
   if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
@@ -141,12 +145,13 @@ function prompt_radium_setup {
   zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
-  RADIUM_LEFT_USER_HOSTNAME="$RADIUM_LEFT_USER_HOSTNAME_BG%F{white}%n%f%F{red} @ %f%F{blue}%m %f%k%F{black}$RADIUM_LEFT_DIR_BG"$RADIUM_SEPARATOR
-  RADIUM_LEFT_DIR="$RADIUM_LEFT_DIR_BG%F{white} %~ %k%f%F{blue}$RADIUM_LEFT_VCS_BG"$RADIUM_SEPARATOR
-  RADIUM_LEFT_VCS="%k%f%F{white}$RADIUM_LEFT_VCS_BG "'${vcs_info_msg_0_}'" %k%f%F{green}$RADIUM_LEFT_GIT_COMMIT_TIME_BG"$RADIUM_SEPARATOR
-  RADIUM_LEFT_GIT_COMMIT_TIME="%k%f%F{white}$RADIUM_LEFT_GIT_COMMIT_TIME_BG "'$(git_time_details)'" %k%f%F{136}"$RADIUM_SEPARATOR"%f "
+  # RADIUM_LEFT_USER_HOSTNAME="$RADIUM_LEFT_USER_HOSTNAME_BG%F{white}%n%f%F{red} @ %f%F{blue}%m %f%k%F{black}$RADIUM_LEFT_DIR_BG"$RADIUM_SEPARATOR
+  # RADIUM_LEFT_DIR="$RADIUM_LEFT_DIR_BG%F{white} %~ %k%f%F{blue}$RADIUM_LEFT_VCS_BG"$RADIUM_SEPARATOR
+  # RADIUM_LEFT_VCS="%k%f%F{white}$RADIUM_LEFT_VCS_BG "'${vcs_info_msg_0_}'" %k%f%F{green}$RADIUM_LEFT_GIT_COMMIT_TIME_BG"$RADIUM_SEPARATOR
+  # RADIUM_LEFT_GIT_COMMIT_TIME="%k%f%F{white}$RADIUM_LEFT_GIT_COMMIT_TIME_BG "'$(git_time_details)'" %k%f%F{136}"$RADIUM_SEPARATOR"%f "
 
-  PROMPT=$RADIUM_LEFT_USER_HOSTNAME$RADIUM_LEFT_DIR$RADIUM_LEFT_VCS$RADIUM_LEFT_GIT_COMMIT_TIME
+  # PROMPT=$RADIUM_LEFT_USER_HOSTNAME$RADIUM_LEFT_DIR$RADIUM_LEFT_VCS$RADIUM_LEFT_GIT_COMMIT_TIME
+  PROMPT='${(e)$(prompt_radium_construct_prompt)}'
   RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
 }
