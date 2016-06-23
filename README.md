@@ -51,17 +51,7 @@ prompt radium
 ```
 
 ### Installation with Prezto
-1. Follow the installation instructions for [Prezto](https://github.com/sorin-ionescu/prezto)
-2. Clone the repository
-```bash
-mkdir ~/.themes
-git clone --recursive https://github.com/dimitardimitrov/radium.git ~/.themes/radium
-```
-3. Link the theme into the Prezto's theme folder
-```bash
-ln -s ~/.themes/prompt_radium_setup [your_path]/prezto/modules/prompt/functions/prompt_radium_setup
-```
-4. Load the theme by adding it to ~/.zpreztorc as mentioned in the [prezto docs](https://github.com/sorin-ionescu/prezto)
+
 
 ## Configuration
 There isn't much to configure. The only real option is to remove the user block from the left side of the prompt. This is convenient when your prompt gets crowded. You can enable/disable the user block through the RADIUM_USER_BLOCK environemntal variable. 
@@ -80,4 +70,4 @@ RODIUM_USER_BLOCK=1
 ## Remove the radium theme
 1. Disable the theme by removing it from:
 - ~/.zsh.after/prompt.zsh - for skwp/dotfiles
-- ~/.zpreztorc - for prezto only installation
+- ~/.zpreztorc - for Prezto only installation
