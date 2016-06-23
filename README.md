@@ -51,6 +51,17 @@ prompt radium
 ```
 
 ### Installation with Prezto
+1. Follow the installation instructions for [Prezto](https://github.com/sorin-ionescu/prezto)
+2. Clone the repository
+```bash
+mkdir ~/.themes
+git clone --recursive https://github.com/dimitardimitrov/radium.git ~/.themes/radium
+```
+3. Link the theme into the Prezto's theme folder
+```bash
+ln -s ~/.themes/prompt_radium_setup [your_path]/prezto/modules/prompt/functions/prompt_radium_setup
+```
+4. Load the theme by adding it to ~/.zpreztorc as mentioned in the [Prezto docs](https://github.com/sorin-ionescu/prezto)
 
 
 ## Configuration
