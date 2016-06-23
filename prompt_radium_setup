@@ -1,7 +1,7 @@
 #
 # A ZSH theme based on swkp prezto theme, the robl ohmyzsh theme, and the paradox prezto theme.
 #  * Single line prompt
-#  * User@hostname on the left
+#  * User@hostname on the left + on/off toggle with an env var
 #  * Git branch info on the left
 #  * Time since last commit on the left
 #  * Time of execution on the right
@@ -10,40 +10,34 @@
 #   Dimitar Dimitrov <dimitrov.inc@gmail.com>
 #
 # Radium User Environment Variables:
-#   RADIUM_USER_BLOCK = TRUE
-
-# Radium colors
-RADIUM_LEFT_USER_HOSTNAME_BG=%K{black}
-RADIUM_LEFT_DIR_BG=%K{blue}
-RADIUM_LEFT_VCS_BG=%K{green}
-RADIUM_LEFT_GIT_COMMIT_TIME_BG=%K{136}
+#   RADIUM_USER_BLOCK=0 Disables the user block
+#   RADIUM_USER_BLOCK=1 Enables the user block
 
 RADIUM_CURRENT_BG='NONE'
 RADIUM_SEPARATOR=$'\u2b80'
 
-# return true if specified VCS is available in directory
 function is_git_repo() {
+  if `git rev-parse --git-dir > /dev/null 2>&1`; then
+    return 0
+  else
+    return 1
+  fi
 }
 
 # returns the time since last git commit
 function git_time_details() {
-  # only proceed if there is actually a git repository
-  if `git rev-parse --git-dir > /dev/null 2>&1`; then
-    # only proceed if there is actually a commit
-    if [[ $(git log 2>&1 > /dev/null | grep -c "^fatal: bad default revision") == 0 ]]; then
-      # get the last commit hash
-      # lc_hash=`git log --pretty=format:'%h' -1 2> /dev/null`
-      # get the last commit time
-      lc_time=`git log --pretty=format:'%at' -1 2> /dev/null`
+  # only proceed if there is actually a commit
+  if [[ $(git log 2>&1 > /dev/null | grep -c "^fatal: bad default revision") == 0 ]]; then
+    # get the last commit hash
+    # lc_hash=`git log --pretty=format:'%h' -1 2> /dev/null`
+    # get the last commit time
+    lc_time=`git log --pretty=format:'%at' -1 2> /dev/null`
 
-      now=`date +%s`
-      seconds_since_last_commit=$((now-lc_time))
-      lc_time_since=`time_since_commit $seconds_since_last_commit`
+    now=`date +%s`
+    seconds_since_last_commit=$((now-lc_time))
+    lc_time_since=`time_since_commit $seconds_since_last_commit`
 
-      echo "$lc_time_since"
-    else
-      echo ""
-    fi
+    echo "$lc_time_since"
   else
     echo ""
   fi
@@ -103,6 +97,16 @@ function prompt_radium_construct_prompt() {
     fi
   else
     prompt_radium_start_segment black default '%F{white}%n%f%F{red} @ %f%F{blue}%m%f'
+  fi
+
+  prompt_radium_start_segment blue black '%F{white} %~ %f'
+
+  if [[ -n ${vcs_info_msg_0_} ]]; then
+    prompt_radium_start_segment green white "${vcs_info_msg_0_}"
+  fi
+
+  if is_git_repo; then
+    prompt_radium_start_segment 136  white "$(git_time_details)"
   fi
 
   prompt_radium_end_segment
@@ -167,12 +171,6 @@ function prompt_radium_setup {
   zstyle ':vcs_info:*:prompt:*' formats       "${fmt_branch}"
   zstyle ':vcs_info:*:prompt:*' nvcsformats   ""
 
-  # RADIUM_LEFT_USER_HOSTNAME="$RADIUM_LEFT_USER_HOSTNAME_BG%F{white}%n%f%F{red} @ %f%F{blue}%m %f%k%F{black}$RADIUM_LEFT_DIR_BG"$RADIUM_SEPARATOR
-  # RADIUM_LEFT_DIR="$RADIUM_LEFT_DIR_BG%F{white} %~ %k%f%F{blue}$RADIUM_LEFT_VCS_BG"$RADIUM_SEPARATOR
-  # RADIUM_LEFT_VCS="%k%f%F{white}$RADIUM_LEFT_VCS_BG "'${vcs_info_msg_0_}'" %k%f%F{green}$RADIUM_LEFT_GIT_COMMIT_TIME_BG"$RADIUM_SEPARATOR
-  # RADIUM_LEFT_GIT_COMMIT_TIME="%k%f%F{white}$RADIUM_LEFT_GIT_COMMIT_TIME_BG "'$(git_time_details)'" %k%f%F{136}"$RADIUM_SEPARATOR"%f "
-
-  # PROMPT=$RADIUM_LEFT_USER_HOSTNAME$RADIUM_LEFT_DIR$RADIUM_LEFT_VCS$RADIUM_LEFT_GIT_COMMIT_TIME
   PROMPT='${(e)$(prompt_radium_construct_prompt)}'
   RPROMPT='%F{blue}[%F{green}%D{%H:%M:%S}%F{blue}]%f'
   SPROMPT='zsh: correct %F{red}%R%f to %F{green}%r%f [nyae]? '
