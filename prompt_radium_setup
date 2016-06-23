@@ -6,6 +6,13 @@
 #  * Time since last commit on the left
 #  * Time of execution on the right
 #
+# Motivation: All of the themes that I have based Radium on are great.
+# As a matter of fact, I have used great code from paradox and swkp.
+# However, I wanted a theme that has a dynamic propmpt with a look that
+# I have control over. It was also a practice in getting more familiar
+# with ZSH. Feel free to use Radium or changed it.
+# This is the beautfy of it all.
+#
 # Authors:
 #   Dimitar Dimitrov <dimitrov.inc@gmail.com>
 #
@@ -16,6 +23,7 @@
 RADIUM_CURRENT_BG='NONE'
 RADIUM_SEPARATOR=$'\u2b80'
 
+# check for a git repo
 function is_git_repo() {
   if `git rev-parse --git-dir > /dev/null 2>&1`; then
     return 0
@@ -28,9 +36,6 @@ function is_git_repo() {
 function git_time_details() {
   # only proceed if there is actually a commit
   if [[ $(git log 2>&1 > /dev/null | grep -c "^fatal: bad default revision") == 0 ]]; then
-    # get the last commit hash
-    # lc_hash=`git log --pretty=format:'%h' -1 2> /dev/null`
-    # get the last commit time
     lc_time=`git log --pretty=format:'%at' -1 2> /dev/null`
 
     now=`date +%s`
@@ -65,6 +70,7 @@ function time_since_commit() {
   fi
 }
 
+# this is the start_segment function from paradox
 function prompt_radium_start_segment {
   local bg fg
   [[ -n "$1" ]] && bg="%K{$1}" || bg="%k"
@@ -78,6 +84,7 @@ function prompt_radium_start_segment {
   [[ -n "$3" ]] && print -n "$3"
 }
 
+# this is the end_segment function from paradox
 function prompt_radium_end_segment {
   if [[ -n "$RADIUM_CURRENT_BG" ]]; then
     print -n " %k%F{$RADIUM_CURRENT_BG}$RADIUM_SEPARATOR"
@@ -89,8 +96,9 @@ function prompt_radium_end_segment {
   RADIUM_CURRENT_BG=''
 }
 
+# TO DO: create individual functions for each block of the prompt
 function prompt_radium_construct_prompt() {
-
+  # show the user block unless it is disabled
   if [[ -n "$RADIUM_USER_BLOCK" ]]; then
     if [[ "$RADIUM_USER_BLOCK" == 1 ]]; then
       prompt_radium_start_segment black default '%F{white}%n%f%F{red} @ %f%F{blue}%m%f'
@@ -99,12 +107,15 @@ function prompt_radium_construct_prompt() {
     prompt_radium_start_segment black default '%F{white}%n%f%F{red} @ %f%F{blue}%m%f'
   fi
 
+  # directory block of the prompt
   prompt_radium_start_segment blue black '%F{white} %~ %f'
 
+  # show the master branch
   if [[ -n ${vcs_info_msg_0_} ]]; then
     prompt_radium_start_segment green white "${vcs_info_msg_0_}"
   fi
 
+  # show the git time
   if is_git_repo; then
     prompt_radium_start_segment 136  white "$(git_time_details)"
   fi
@@ -134,7 +145,7 @@ function prompt_radium_setup {
 
   add-zsh-hook precmd prompt_radium_precmd
 
-  # Use extended color pallete if available.
+  # use extended color pallete if available.
   if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
     __PROMPT_SKWP_COLORS=(
       "%F{81}"  # turquoise
@@ -153,7 +164,7 @@ function prompt_radium_setup {
     )
   fi
 
-  # Enable VCS systems you use.
+  # enable VCS systems you use.
   zstyle ':vcs_info:*' enable bzr git hg svn
 
   # check-for-changes disabled for performance reasons
