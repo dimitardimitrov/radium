@@ -101,10 +101,10 @@ function prompt_radium_construct_prompt() {
   # show the user block unless it is disabled
   if [[ -n "$RADIUM_USER_BLOCK" ]]; then
     if [[ "$RADIUM_USER_BLOCK" == 1 ]]; then
-      prompt_radium_start_segment black default '%F{white}%n%f%F{red} @ %f%F{blue}%m%f'
+      prompt_radium_start_segment black default '%F{white}%n%f%F{red}@%f%F{blue}%m%f'
     fi
   else
-    prompt_radium_start_segment black default '%F{white}%n%f%F{red} @ %f%F{blue}%m%f'
+    prompt_radium_start_segment black default '%F{white}%n%f%F{red}@%f%F{blue}%m%f'
   fi
 
   # directory block of the prompt
