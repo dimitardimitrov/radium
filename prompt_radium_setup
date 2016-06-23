@@ -8,6 +8,9 @@
 #
 # Authors:
 #   Dimitar Dimitrov <dimitrov.inc@gmail.com>
+#
+# Radium User Environment Variables:
+#   RADIUM_USER_BLOCK = TRUE
 
 # Radium colors
 RADIUM_LEFT_USER_HOSTNAME_BG=%K{black}
@@ -15,15 +18,11 @@ RADIUM_LEFT_DIR_BG=%K{blue}
 RADIUM_LEFT_VCS_BG=%K{green}
 RADIUM_LEFT_GIT_COMMIT_TIME_BG=%K{136}
 
+RADIUM_CURRENT_BG='NONE'
 RADIUM_SEPARATOR=$'\u2b80'
-RADIUM_R_SEPARATOR=$'\u2b82'
 
 # return true if specified VCS is available in directory
-function vcs_exist() {
-# parameter VCS name: git, bzr, hg, svn
-# check if the VCS passed as parameter exists in the directory
-# return true if it exist and false if it does not
-# when no parameter is passed, check for git by default
+function is_git_repo() {
 }
 
 # returns the time since last git commit
@@ -72,8 +71,41 @@ function time_since_commit() {
   fi
 }
 
+function prompt_radium_start_segment {
+  local bg fg
+  [[ -n "$1" ]] && bg="%K{$1}" || bg="%k"
+  [[ -n "$2" ]] && fg="%F{$2}" || fg="%f"
+  if [[ "$RADIUM_CURRENT_BG" != 'NONE' && "$1" != "$RADIUM_CURRENT_BG" ]]; then
+    print -n " $bg%F{$RADIUM_CURRENT_BG}$RADIUM_SEPARATOR$fg "
+  else
+    print -n "$bg$fg "
+  fi
+  RADIUM_CURRENT_BG="$1"
+  [[ -n "$3" ]] && print -n "$3"
+}
+
+function prompt_radium_end_segment {
+  if [[ -n "$RADIUM_CURRENT_BG" ]]; then
+    print -n " %k%F{$RADIUM_CURRENT_BG}$RADIUM_SEPARATOR"
+  else
+    print -n "%k"
+  fi
+  print -n "%f"
+
+  RADIUM_CURRENT_BG=''
+}
+
 function prompt_radium_construct_prompt() {
-  print -n "$RADIUM_LEFT_USER_HOSTNAME_BG%F{white}%n%f%F{red} @ %f%F{blue}%m %f%k"
+
+  if [[ -n "$RADIUM_USER_BLOCK" ]]; then
+    if [[ "$RADIUM_USER_BLOCK" == 1 ]]; then
+      prompt_radium_start_segment black default '%F{white}%n%f%F{red} @ %f%F{blue}%m%f'
+    fi
+  else
+    prompt_radium_start_segment black default '%F{white}%n%f%F{red} @ %f%F{blue}%m%f'
+  fi
+
+  prompt_radium_end_segment
 }
 
 function prompt_radium_precmd {
@@ -122,16 +154,6 @@ function prompt_radium_setup {
 
   # check-for-changes disabled for performance reasons
   zstyle ':vcs_info:*:prompt:*' check-for-changes false
-
-  # Formats:
-  # %b - branchname
-  # %u - unstagedstr (see below)
-  # %c - stagedstr (see below)
-  # %a - action (e.g. rebase-i)
-  # %R - repository path
-  # %S - path in the repository
-  # %n - user
-  # %m - machine hostname
 
   # local fmt_branch="(${__PROMPT_SKWP_COLORS[1]}%b%f%u%c)"
   local fmt_branch="${__PROMPT_SKWP_COLORS[2]}%b%f%u%c"
