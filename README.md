@@ -31,24 +31,21 @@ I am a big fan of [skwp/dotfiles](https://github.com/skwp/dotfiles) and radium w
 ### Installation along with skwp/dotfiles
 You can clone the skwp/dotfiles repo and add the theme in zsh/prezto/modules/prompt/functions. However, if you just want to play with it in your current installation, the following instructions are much less intrusive.
 
-1. Install skwp/dotfiles by following the instruction outlined [here](https://github.com/skwp/dotfiles#installation)
-2. Clone the repository
-```bash
-mkdir ~/.themes
-git clone --recursive https://github.com/dimitardimitrov/radium.git ~/.themes/radium
-```
-3. Make the theme available to ZSH
-```bash
-ln -s ~/.themes/prompt_radium_setup ~/.zsh.prompts/prompt_radium_setup
-``` 
-4. Enable the theme
-```bash
-echo "prompt radium" > ~/.zsh.after/prompt.zsh
-```
+  1. Install skwp/dotfiles by following the instruction outlined [here](https://github.com/skwp/dotfiles#installation)
+  2. Clone the repository:
+
+        git clone --recursive https://github.com/dimitardimitrov/radium.git ~/.themes/radium
+
+  3. Make the theme available to ZSH:
+
+        ln -s ~/.themes/prompt_radium_setup ~/.zsh.prompts/prompt_radium_setup
+
+  4. Enable the theme:
+
+        echo "prompt radium" > ~/.zsh.after/prompt.zsh
+
 If the file exist, simply open it in an editor and add:
-```
-prompt radium
-```
+        prompt radium
 
 ### Installation with Prezto
 1. Follow the installation instructions for [Prezto](https://github.com/sorin-ionescu/prezto)
