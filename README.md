@@ -42,7 +42,7 @@ You can clone the [skwp/dotfiles](https://github.com/skwp/dotfiles#installation)
 
   3. Make the theme available to ZSH:
 
-        ln -s ~/.themes/prompt_radium_setup ~/.zsh.prompts/prompt_radium_setup
+        ln -s ~/.themes/radium/prompt_radium_setup ~/.zsh.prompts/prompt_radium_setup
 
   4. Enable the theme:
 
@@ -60,7 +60,7 @@ You can clone the [skwp/dotfiles](https://github.com/skwp/dotfiles#installation)
 
   3. Link the radium theme file into the Prezto's theme folder:
 
-        ln -s ~/.themes/prompt_radium_setup [your_path]/prezto/modules/prompt/functions/prompt_radium_setup
+        ln -s ~/.themes/radium/prompt_radium_setup [your_path]/prezto/modules/prompt/functions/prompt_radium_setup
 
   4. Load the theme by adding it to ~/.zpreztorc as mentioned in the [Prezto docs](https://github.com/sorin-ionescu/prezto)
 
