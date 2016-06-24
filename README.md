@@ -6,7 +6,7 @@ and in fact I have based my theme on several of them. Feel free to use or abuse
 this as you see fit.
 
 ## Prompt design
-- Designed for dark terminals
+- Designed for dark terminals(works best with Solarized iTerm2 theme)
 - Single line prompt
 - User@hostname on the left + on/off toggle through an env var
 - Git branch info on the left
