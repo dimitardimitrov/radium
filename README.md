@@ -6,7 +6,7 @@ and in fact I have based my theme on several of them. Feel free to use or abuse
 this as you see fit.
 
 ## Prompt design
-- Designed for dark terminals(works best with Solarized iTerm2 theme)
+- Designed for dark terminals (**works best with Solarized iTerm2 theme**)
 - Single line prompt
 - User@hostname on the left + on/off toggle through an env var
 - Git branch info on the left
@@ -62,7 +62,7 @@ You can clone the [skwp/dotfiles](https://github.com/skwp/dotfiles#installation)
 
         ln -s ~/.themes/radium/prompt_radium_setup [your_path]/prezto/modules/prompt/functions/prompt_radium_setup
 
-  4. Load the theme by adding it to ~/.zpreztorc as mentioned in the [Prezto docs](https://github.com/sorin-ionescu/prezto)
+  4. Load the theme by adding it to *~/.zpreztorc* as mentioned in the [Prezto docs](https://github.com/sorin-ionescu/prezto)
 
 ## Configuration
 There isn't much to configure. The only option is to remove the user block from the left side of the prompt. This is convenient when your prompt gets crowded. You can enable/disable the user block through the RADIUM_USER_BLOCK environemntal variable. 
@@ -85,4 +85,4 @@ There isn't much to configure. The only option is to remove the user block from 
 
         ~/.zpreztorc - for Prezto only installation
 
-2. Delete the ~/.themes folder or just the radium theme from it if you have stored other themes there.
+2. Delete the *~/.themes* folder or just the radium theme from it if you have stored other themes there.
