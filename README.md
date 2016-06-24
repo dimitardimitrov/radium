@@ -30,10 +30,10 @@ this as you see fit.
 
 I am a big fan of [skwp/dotfiles](https://github.com/skwp/dotfiles) and radium was created to work with it.
 
-The installation instruction are a guidance, not a prescription.
+The installation instruction are a guidance, not a prescription. In other words, do what you want if you know what you are doing.
 
 ### Installation along with skwp/dotfiles
-You can clone the skwp/dotfiles repo and add the theme in *zsh/prezto/modules/prompt/functions*. However, if you just want to play with it in your current installation, the following instructions are much less intrusive.
+You can clone the [skwp/dotfiles](https://github.com/skwp/dotfiles#installation) repo and add the theme in *zsh/prezto/modules/prompt/functions*. However, skwp/dotfiles offers several ways of altering/overwriding the theme that are much more elegant. I would recomend using the following instructions since they take advantage of those methods.
 
   1. Install [skwp/dotfiles](https://github.com/skwp/dotfiles#installation)
   2. Clone the repository:
@@ -48,7 +48,7 @@ You can clone the skwp/dotfiles repo and add the theme in *zsh/prezto/modules/pr
 
         echo "prompt radium" > ~/.zsh.after/prompt.zsh
 
-If the file exist, simply open it in an editor and add:
+  If the file exist, simply open it in an editor and add:
 
         prompt radium
 
@@ -68,7 +68,7 @@ If the file exist, simply open it in an editor and add:
 There isn't much to configure. The only option is to remove the user block from the left side of the prompt. This is convenient when your prompt gets crowded. You can enable/disable the user block through the RADIUM_USER_BLOCK environemntal variable. 
 
 #### Disable the user block
-  1. Add the user block variable with 0 value(false) to your environment variables. 
+  1. Add the user block variable with 0 value(false) to your user environment variables file. 
   
         RODIUM_USER_BLOCK=0" >> ~/.zprofile
 
@@ -80,6 +80,9 @@ There isn't much to configure. The only option is to remove the user block from 
 
 ## Remove the radium theme
 1. Disable the theme by removing it from:
+
         ~/.zsh.after/prompt.zsh - for skwp/dotfiles
+
         ~/.zpreztorc - for Prezto only installation
+
 2. Delete the ~/.themes folder or just the radium theme from it if you have stored other themes there.
