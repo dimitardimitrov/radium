@@ -71,14 +71,6 @@ You can clone the [skwp/dotfiles](https://github.com/skwp/dotfiles#installation)
 ## Configuration
 You can enable/disable the user block through the RADIUM_USER_BLOCK environemntal variable.
 
-Radium User Environment Variables:
-       RADIUM_USER_BLOCK=0 Disables the user block
-       RADIUM_USER_BLOCK=1 Enables the user block
-
-You will also need to set your fonts in terminal. For iTerm, you will have to
-set both Font and non-ASCII Font using the Powerline fonts from above for the
-non-ASCII Fonts
-
 #### Disable the user block
   1. Add the user block variable with 0 value(false) to your user environment variables file.
 
@@ -89,6 +81,12 @@ non-ASCII Fonts
   2. Change the value of RODIUM_USER_BLOCK variable to 1 or remove the variable completely:
 
         RODIUM_USER_BLOCK=1
+        
+
+#### Fonts
+You will also need to set your fonts in terminal. For iTerm, you will have to
+set both Font and non-ASCII Font using the Powerline fonts from above for the
+non-ASCII Fonts
 
 ## Remove the radium theme
 1. Disable the theme by removing it from:
