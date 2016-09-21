@@ -1,5 +1,5 @@
 #
-# A ZSH theme based on swkp prezto theme, the robl ohmyzsh theme, and the paradox prezto theme.
+# A ZSH theme based on swkp prezto theme, agnoster, the robl ohmyzsh theme, and the paradox prezto theme.
 #  * Single line prompt
 #  * User@hostname on the left + on/off toggle with an env var
 #  * Git branch info on the left
@@ -9,9 +9,9 @@
 # Motivation: All of the themes that I have based Radium on are great.
 # As a matter of fact, I have used great code from paradox and swkp.
 # However, I wanted a theme that has a dynamic propmpt with a look that
-# I have control over. It was also a practice in getting more familiar
-# with ZSH. Feel free to use Radium or changed it.
-# This is the beautfy of it all.
+# I have control over. It was also my attempt in becoming familiar
+# with ZSH. Feel free to use Radium or change it.
+# This is the beauty of it all.
 #
 # Authors:
 #   Dimitar Dimitrov <dimitrov.inc@gmail.com>
