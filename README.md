@@ -32,6 +32,10 @@ I am a big fan of [skwp/dotfiles](https://github.com/skwp/dotfiles) and radium w
 
 The installation instruction are a guidance, not a prescription. In other words, do what you want if you know what you are doing.
 
+### Installation of fonts
+You will need to install the Powerline Patched fonts first. The screenshots of Radium are using Inconsolata for Powerline. However, the great guys from Powerline have patched a few of everybody's favorites:
+  1. Install fonts: [powerline fonts](https://github.com/powerline/fonts)
+
 ### Installation along with skwp/dotfiles
 You can clone the [skwp/dotfiles](https://github.com/skwp/dotfiles#installation) repo and add the theme in *zsh/prezto/modules/prompt/functions*. However, skwp/dotfiles offers several ways of altering/overwriding the theme that are much more elegant. I would recomend using the following instructions since they take advantage of those methods.
 
@@ -65,11 +69,19 @@ You can clone the [skwp/dotfiles](https://github.com/skwp/dotfiles#installation)
   4. Load the theme by adding it to *~/.zpreztorc* as mentioned in the [Prezto docs](https://github.com/sorin-ionescu/prezto)
 
 ## Configuration
-There isn't much to configure. The only option is to remove the user block from the left side of the prompt. This is convenient when your prompt gets crowded. You can enable/disable the user block through the RADIUM_USER_BLOCK environemntal variable. 
+You can enable/disable the user block through the RADIUM_USER_BLOCK environemntal variable.
+
+Radium User Environment Variables:
+       RADIUM_USER_BLOCK=0 Disables the user block
+       RADIUM_USER_BLOCK=1 Enables the user block
+
+You will also need to set your fonts in terminal. For iTerm, you will have to
+set both Font and non-ASCII Font using the Powerline fonts from above for the
+non-ASCII Fonts
 
 #### Disable the user block
-  1. Add the user block variable with 0 value(false) to your user environment variables file. 
-  
+  1. Add the user block variable with 0 value(false) to your user environment variables file.
+
         RODIUM_USER_BLOCK=0" >> ~/.zprofile
 
 #### Enable the user block
