@@ -1,5 +1,5 @@
 #
-# A ZSH theme based on swkp prezto theme, agnoster, the robl ohmyzsh theme, and the paradox prezto theme.
+# A ZSH theme based on skwp prezto theme, agnoster, the robl ohmyzsh theme, and the paradox prezto theme.
 #  * Single line prompt
 #  * User@hostname on the left + on/off toggle with an env var
 #  * Git branch info on the left
@@ -126,7 +126,7 @@ function prompt_radium_construct_prompt() {
 function prompt_radium_precmd {
   # Check for untracked files or updated submodules since vcs_info doesn't.
   if [[ ! -z $(git ls-files --other --exclude-standard 2> /dev/null) ]]; then
-    fmt_branch="%b%u%c${__PROMPT_SKWP_COLORS[4]}●%f"
+    fmt_branch="%b%u%c${__PROMPT_RADIUM_COLORS[4]}●%f"
   else
     fmt_branch="%b%u%c"
   fi
@@ -147,7 +147,7 @@ function prompt_radium_setup {
 
   # use extended color pallete if available.
   if [[ $TERM = *256color* || $TERM = *rxvt* ]]; then
-    __PROMPT_SKWP_COLORS=(
+    __PROMPT_RADIUM_COLORS=(
       "%F{81}"  # turquoise
       "%F{166}" # orange
       "%F{135}" # purple
@@ -155,7 +155,7 @@ function prompt_radium_setup {
       "%F{118}" # limegreen
     )
   else
-    __PROMPT_SKWP_COLORS=(
+    __PROMPT_RADIUM_COLORS=(
       "%F{cyan}"
       "%F{yellow}"
       "%F{magenta}"
@@ -170,11 +170,11 @@ function prompt_radium_setup {
   # check-for-changes disabled for performance reasons
   zstyle ':vcs_info:*:prompt:*' check-for-changes false
 
-  # local fmt_branch="(${__PROMPT_SKWP_COLORS[1]}%b%f%u%c)"
-  local fmt_branch="${__PROMPT_SKWP_COLORS[2]}%b%f%u%c"
-  local fmt_action="${__PROMPT_SKWP_COLORS[5]}%a%f"
-  local fmt_unstaged="${__PROMPT_SKWP_COLORS[2]}●%f"
-  local fmt_staged="${__PROMPT_SKWP_COLORS[5]}●%f"
+  # local fmt_branch="(${__PROMPT_RADIUM_COLORS[1]}%b%f%u%c)"
+  local fmt_branch="${__PROMPT_RADIUM_COLORS[2]}%b%f%u%c"
+  local fmt_action="${__PROMPT_RADIUM_COLORS[5]}%a%f"
+  local fmt_unstaged="${__PROMPT_RADIUM_COLORS[2]}●%f"
+  local fmt_staged="${__PROMPT_RADIUM_COLORS[5]}●%f"
 
   zstyle ':vcs_info:*:prompt:*' unstagedstr   "${fmt_unstaged}"
   zstyle ':vcs_info:*:prompt:*' stagedstr     "${fmt_staged}"
