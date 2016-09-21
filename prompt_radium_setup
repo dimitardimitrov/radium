@@ -21,7 +21,7 @@
 #   RADIUM_USER_BLOCK=1 Enables the user block
 
 RADIUM_CURRENT_BG='NONE'
-RADIUM_SEPARATOR=$'\u2b80'
+RADIUM_SEPARATOR=$'\ue0b0'
 
 # check for a git repo
 function is_git_repo() {
