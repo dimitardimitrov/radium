@@ -37,6 +37,7 @@ You will need to install the Powerline Patched fonts first. The screenshots of R
   1. Install fonts: [powerline fonts](https://github.com/powerline/fonts)
 
 ### Installation along with skwp/dotfiles
+
 You can clone the [skwp/dotfiles](https://github.com/skwp/dotfiles#installation) repo and add the theme in *zsh/prezto/modules/prompt/functions*. However, skwp/dotfiles offers several ways of altering/overwriding the theme that are much more elegant. I would recomend using the following instructions since they take advantage of those methods.
 
   1. Install [skwp/dotfiles](https://github.com/skwp/dotfiles#installation)
@@ -57,6 +58,7 @@ You can clone the [skwp/dotfiles](https://github.com/skwp/dotfiles#installation)
         prompt radium
 
 ### Installation with Prezto
+
   1. Install [Prezto](https://github.com/sorin-ionescu/prezto)
   2. Clone the repository:
 
@@ -68,15 +70,26 @@ You can clone the [skwp/dotfiles](https://github.com/skwp/dotfiles#installation)
 
   4. Load the theme by adding it to *~/.zpreztorc* as mentioned in the [Prezto docs](https://github.com/sorin-ionescu/prezto)
 
+### Installation with Zgen
+
+  1. Install [zgen](https://github.com/tarjoilija/zgen)
+  2. Add `zgen load dimitardimitrov/radium` to your `.zshrc` with your other plugins and themes.
+  3. `zgen save`
+
+zgen will automatically clone the repo and add it your environment the next time you start a terminal session.
+
 ## Configuration
+
 You can enable/disable the user block through the RADIUM_USER_BLOCK environemntal variable.
 
 #### Disable the user block
+
   1. Add the user block variable with 0 value(false) to your user environment variables file.
 
         RODIUM_USER_BLOCK=0" >> ~/.zprofile
 
 #### Enable the user block
+
   1. Edit your environment variable file for ZSH
   2. Change the value of RODIUM_USER_BLOCK variable to 1 or remove the variable completely:
 
@@ -84,11 +97,13 @@ You can enable/disable the user block through the RADIUM_USER_BLOCK environemnta
         
 
 #### Fonts
+
 You will also need to set your fonts in terminal. For iTerm, you will have to
 set both Font and non-ASCII Font using the Powerline fonts from above for the
 non-ASCII Fonts
 
 ## Remove the radium theme
+
 1. Disable the theme by removing it from:
 
         ~/.zsh.after/prompt.zsh - for skwp/dotfiles
